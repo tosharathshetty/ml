@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  sparrow:
+    image: tosharathshetty/ml-inference
+    container_name: ml-train-test-inference
+    build:
+      context: ./ml-train-test-inference/api
+      dockerfile: ./Dockerfile
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:8080 ml-train-test-inference/api/endpoints.py "]
+    ports:
+      - 8080:8080
